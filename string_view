@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+
+void* operator new (std::size_t count){
+  std::cout << count << "bytes 할당" << std::endl;
+  return malloc(count);
+}
+
+bool contains_very(const std::string& str){
+  return str.find("very") != std::string::npos;
+}
+int main(){
+  std::cout << std::boolalpha << contains_very("c++ string is very to use")
+            << std::endl;
+
+  std::cout << contains_very("c++ string is not very to use") << std::endl;
+}
+
+//==============================================================================
+
+#include <iostream>
+#include <string>
+
+
+
+void* operator new(std::size_t count) {
+std::cout << count << " bytes 할당 " << std::endl;
+return malloc(count);
+}
+
+
+int main() {
+std::cout << "string -----" << std::endl;
+std::string s = "sometimes string is very slow";
+std::cout << "--------------------" << std::endl;
+std::cout << s.substr(0, 20) << std::endl << std::endl;
+std::cout << "string_view -----" << std::endl;
+std::string_view sv = s;
+std::cout << "--------------------" << std::endl;
+std::cout << sv.substr(0, 20) << std::endl;
+}
+//==============================================================================
+
+#include <iostream>
+#include <string>
+
+std::string_view return_sv(){
+  std::string s = "this is a string";
+
+  std::string_view sv = s;
+
+  return sv;
+
+  
+}
+
+int main(){
+  std::string_view sv = return_sv();
+
+  std::cout << sv << std::endl;
+}
+
+
+//==============================================================================
