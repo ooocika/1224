@@ -1,0 +1,107 @@
+#include <iostream>
+#include<string>
+
+int main(){
+  std::string str = u8"이건 UTF-8 문자열 입니다";
+  std::cout << str.size() << std::endl;
+}
+
+///==================================================================/==================================================================
+#include <iostream>
+#include<string>
+
+int main(){
+  std::string str = u8"이건 UTF-8 문자열 입니다";
+  size_t i  = 0;
+  size_t len = 0;
+
+  while (i < str.size()){
+    int char_size = 0;
+
+    if((str[i] & 0b11111000) == 0b11110000){
+      char_size = 4;
+    }else if((str[i] & 0b11110000) == 0b11100000){
+      char_size = 3;
+    }else if((str[i] & 0b11100000) == 0b11000000){
+      char_size = 2;
+    }else if((str[i] & 0b10000000) == 0b00000000){
+      char_size = 1;
+  }
+
+
+    std::cout << str.substr(i, char_size) << std::endl;
+
+    i += char_size;
+    len++;
+  }
+  std::cout << "문자열의 실제 길이 : " << len << std::endl;
+
+}
+//==================================================================/==================================================================
+#include <iostream>
+#include<string>
+
+int main(){
+  std::u16string u16_str = u"이건 UTF-16 문자열 입니다";
+  std::cout << u16_str.size() << std::endl;
+}
+
+//==================================================================/========================
+
+#include <iostream>
+#include<string>
+
+int main(){
+  std::u16string u16_str = u"안녕하세요 모두의 코드에 오신 것을 환영합니다";
+
+std::string jaum[] = {"ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ",
+  "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ",
+  "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
+
+
+  for(char16_t c : u16_str){
+
+    if(!(0xAC00 <= c && c <= 0xD7A3)){
+      continue;
+    }
+
+
+    int offset = c - 0xAC00;
+    int jaum_offset= offset / 0x24C;
+  std::cout << jaum[jaum_offset];
+  }
+
+  
+}
+
+//==================================================================/========================
+
+#include <iostream>
+#include<string>
+
+int main(){
+  std::u16string u16_str = u"xx";
+  std::cout << u16_str.size() << std::endl;
+}
+//==================================================================/========================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//==================================================================/========================
+
+
